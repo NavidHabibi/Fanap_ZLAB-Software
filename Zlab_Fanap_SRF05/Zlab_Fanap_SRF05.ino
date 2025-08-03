@@ -1,6 +1,10 @@
-void setup() {
-  // put your setup code here, to run once:
 
+
+String defaultUnit = "CM";
+
+void setup() {
+
+  Serial.begin(115200);
 }
 
 void checkSerialForUnit() {
