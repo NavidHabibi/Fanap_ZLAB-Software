@@ -1,10 +1,26 @@
-
+#define TRIGGER_PIN 9
+#define ECHO_PIN 8
 
 String defaultUnit = "CM";
 
 void setup() {
-
+  pinMode(TRIGGER_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
   Serial.begin(115200);
+}
+
+long measureRaw() {
+  digitalWrite(TRIGGER_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIGGER_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIGGER_PIN, LOW);
+  return pulseIn(ECHO_PIN, HIGH, 30000);
+}
+
+float measureOnce(String unit = "CM") {
+  long duration = measureRaw();
+  return convertToDistance(duration, unit);
 }
 
 void checkSerialForUnit() {
