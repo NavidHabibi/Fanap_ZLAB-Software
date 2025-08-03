@@ -19,6 +19,11 @@ void checkSerialForUnit() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  checkSerialForUnit();
+
+  Serial.print("Distance: ");
+  Serial.print(dist, 1);
+  Serial.print(" ");
+  Serial.println(defaultUnit);
 
 }
