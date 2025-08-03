@@ -23,6 +23,14 @@ float measureOnce(String unit = "CM") {
   return convertToDistance(duration, unit);
 }
 
+float convertToDistance(long duration, String unitStr) {
+  unitStr.toUpperCase();
+  if (unitStr == "CM") return duration / 58.0;
+  if (unitStr == "MM") return (duration / 58.0) * 10.0;
+  if (unitStr == "INCH") return duration / 148.0;
+  return -1.0;
+}
+
 void checkSerialForUnit() {
   if (Serial.available()) {
     String input = Serial.readStringUntil('\n');
@@ -42,6 +50,7 @@ void loop() {
   checkSerialForUnit();
 
   Serial.print("Distance: ");
+  float dist ;
   Serial.print(dist, 1);
   Serial.print(" ");
   Serial.println(defaultUnit);
