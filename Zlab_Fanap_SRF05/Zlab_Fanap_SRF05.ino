@@ -96,6 +96,17 @@ float median(float arr[], int size) {
   return temp[size / 2];
 }
 
+bool isObjectAtDistance(float threshold, String unit = "CM") {
+  unsigned long startTime = millis();
+  const unsigned long timeout = 5000;
+  while (millis() - startTime < timeout) {
+    float distance = measureFiltered(200, unit);
+    if (distance >= 0 && distance <= threshold) return true;
+    delay(100);
+  }
+  return false;
+}
+
 void loop() {
   checkSerialForUnit();
 
@@ -104,5 +115,13 @@ void loop() {
   Serial.print(dist, 1);
   Serial.print(" ");
   Serial.println(defaultUnit);
+
+    if (isObjectAtDistance(100, defaultUnit)) {
+    Serial.println("Object Detected!");
+  } else {
+    Serial.println("No Object.");
+  }
+
+  delay(2000);
 
 }
